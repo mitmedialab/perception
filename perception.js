@@ -41,8 +41,8 @@ function draw() {
   	textAlign(CENTER, CENTER);
   	text('MACHINE PERCEPTION', windowWidth/2, 100);
 
-  	// imageMode(CENTER, CENTER);
-  	// image(camera, windowWidth/2, 300, 200, 200);
+  	imageMode(CENTER, CENTER);
+  	image(camera, windowWidth/2, 300, 200, 200);
   }
 
   if (frameCount==1){
