@@ -4,7 +4,7 @@ let frameCount=0;
 let c=0;
 
 function preload() {
-  myFont = loadFont('DIN Alternate Bold.otf');
+  myFont = loadFont('DIN.otf');
   instructions = ['Have you ever wondered how computers can look at us? \n Computers have ‘cameras’ that enable them to look at us. \n How do cameras capture images? Let’s try it out. \n Enable your camera', 'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', '' ];
 
   backgroundColors = ['#78e08f', '#fa983a', '#e55039', '#38ada9', '#b8e994', '#b71540', '#079992', '#6a89cc'];
