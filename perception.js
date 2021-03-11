@@ -28,7 +28,7 @@ function draw() {
   background(backgroundColors[frameCount]);
   fill(255);
   // textFont(myFont);
-  textSize(30);
+  textSize(26);
   noStroke();
   textAlign(CENTER, CENTER);
   instruction = text(instructions[frameCount], windowWidth/2, 700);
