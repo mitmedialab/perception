@@ -17,7 +17,6 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   button = createButton('>>');
   button.style('font-size', '24px');
   button.position(1100, 800);
@@ -26,11 +25,15 @@ function setup() {
   capture = createCapture(VIDEO);
   capture.size(400, 300);
   capture.hide();
-  
-  // button.style('font-size', '24px');
-  // button.position(1100, 800);
-  // button.mousePressed(next);
+  // resetSketch();
 }
+
+// function resetSketch(){
+//   button = createButton('>>');
+//   button.style('font-size', '24px');
+//   button.position(1100, 800);
+//   button.mousePressed(next);
+// }
 
 function draw() {
   background(backgroundColors[frameCount]);
