@@ -5,21 +5,26 @@ let c=0;
 
 function preload() {
   myFont = loadFont('DIN.otf');
-  instructions = ['Have you ever wondered how computers can look at us? \n Computers have ‘cameras’ that enable them to look at us. \n How do cameras capture images? Let’s try it out. \n Enable your camera', 'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', '' ];
+  instructions = ['Have you ever wondered how computers can look at us? \n Computers have "cameras" that enable them to look at us. \n How do cameras capture images? Let’s learn how cameras capture pictures. \n \n Turn on your webcam by clicking on "Allow" in the pop-up dialogue', 
+  'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', 
+  'Every pixel has a color. Every color is made of the three primary colors: Red, Green and Blue (RGB).\n The values indicate the redness, greenness and blueness of the color. \n Click on any point in the image above to see the RGB values of that point',
+  'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.' ];
 
   backgroundColors = ['#78e08f', '#fa983a', '#e55039', '#38ada9', '#b8e994', '#b71540', '#079992', '#6a89cc'];
+  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?'];
   camera = loadImage('camera.png');
+  overlay = loadImage('overlay.png');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
   capture = createCapture(VIDEO);
-  // capture.size(400, 300);
+  capture.size(400, 300);
   capture.hide();
   
-  button = createButton('Let us find out');
-  button.style('font-size', '22px');
+  button = createButton('Next');
+  button.style('font-size', '24px');
   button.position(windowWidth/2-50, 800);
   button.mousePressed(next);
 }
@@ -28,10 +33,11 @@ function draw() {
   background(backgroundColors[frameCount]);
   fill(255);
   textFont(myFont);
-  textSize(26);
+  textSize(24);
   noStroke();
   textAlign(CENTER, CENTER);
-  instruction = text(instructions[frameCount], windowWidth/2, 700);
+  // Caption text here
+  instruction = text(instructions[frameCount], windowWidth/2, 650);
 
   button.style('color', backgroundColors[frameCount]);
 
@@ -43,38 +49,60 @@ function draw() {
   	text('MACHINE PERCEPTION', windowWidth/2, 100);
 
   	imageMode(CENTER, CENTER);
-  	image(camera, windowWidth/2, 300, 200, 250);
+    // camera icon
+  	image(camera, windowWidth/2, 300);
   }
 
   if (frameCount==1){
-  	// capture = createCapture(VIDEO);
+    imageMode(CORNER);
+    faces = image(capture, 540, 100, 600, 450);
+    noFill();
+    stroke(245);
+    strokeWeight(10);
+    rect(540, 100, 600, 450);
   }
 
   if (frameCount==2){
-  	faces = image(capture, windowWidth/2-300, 100, 600, 450);
-	noFill();
-	stroke('#b8e994');
-	strokeWeight(10);
-	rect(windowWidth/2-300, 100, 600, 450);
+    imageMode(CORNER);
+  	faces = image(capture, 540, 100, 600, 450);
+  	noFill();
+  	stroke(245);
+  	strokeWeight(10);
+  	rect(540, 100, 600, 450);
 
-	noStroke();
-	fill(c);
-	colorRect = rect(1200, 220, 30, 30);
-	colorText = text('Color', 1300, 240);
+  	noStroke();
+  	fill(c);
+  	colorRect = rect(1200, 220, 30, 30);
+  	colorText = text('Color', 1300, 240);
 
-	fill(255,0,0);
-	colorRect = rect(1200, 280, 30, 30);
-	text(c[0], 1300, 300);
+  	fill(255,0,0);
+  	colorRect = rect(1200, 280, 30, 30);
+  	text(c[0], 1300, 300);
 
-	fill(0,255,0);
-	colorRect = rect(1200, 320, 30, 30);
-	colorText = text(c[1], 1300, 340);
+  	fill(0,255,0);
+  	colorRect = rect(1200, 320, 30, 30);
+  	colorText = text(c[1], 1300, 340);
 
-	fill(0,0,255);
-	colorRect = rect(1200, 360, 30, 30);
-	colorText = text(c[2], 1300, 380);
-}
+  	fill(0,0,255);
+  	colorRect = rect(1200, 360, 30, 30);
+  	colorText = text(c[2], 1300, 380);
 
+    noFill();
+    strokeWeight(1);
+    stroke(1200);
+    rect(mouseX-5, mouseY-5, 10, 10);
+  }
+
+  if (frameCount==3){
+    imageMode(CORNER);
+    faces = image(capture, 540, 100, 600, 450);
+    noFill();
+    stroke('#0a3d62');
+    strokeWeight(10);
+    rect(540, 100, 600, 450);
+
+    pixelOverlay = image(overlay, 540, 44, 1112, 566);
+  }
 }
 
  function mousePressed(){
