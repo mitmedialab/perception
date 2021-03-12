@@ -7,16 +7,18 @@ function preload() {
   instructions = ['Have you ever wondered how computers can look at us? \n Computers have "cameras" that enable them to look at us. \n How do cameras capture images? Let’s learn how cameras capture pictures. \n \n Turn on your webcam by clicking on "Allow" in the pop-up dialogue', 
   'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', 
   'Every pixel has a color. Every color is made of the three primary colors: Red, Green and Blue (RGB).\n The values indicate the redness, greenness and blueness of the color. \n Click on any point in the image above to see the RGB values of that point',
-  'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.' ];
+  'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.',
+  'Great job! You now know about how machines see us and how they store data. \n You can now close this window.' ];
 
   backgroundColors = ['#78e08f', '#fa983a', '#e55039', '#38ada9', '#b8e994', '#b71540', '#079992', '#6a89cc'];
-  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', 'End'];
+  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', ''];
   camera = loadImage('camera.png');
   overlay = loadImage('overlay.png');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   button = createButton('>>');
   button.style('font-size', '24px');
   button.position(1100, 800);
@@ -36,6 +38,7 @@ function setup() {
 // }
 
 function draw() {
+
   background(backgroundColors[frameCount]);
   fill(255);
   textFont(myFont);
@@ -50,7 +53,7 @@ function draw() {
   textStyle(BOLDITALIC);
   nextThing = text(buttonLabels[frameCount], windowWidth/2, 810);
 
-  button.style('color', backgroundColors[frameCount]);
+  // button.style('color', backgroundColors[frameCount]);
 
   if (frameCount==0){
   	textSize(36);
@@ -115,11 +118,6 @@ function draw() {
     pixelOverlay = image(overlay, 540, 44, 1112, 566);
   }
 
-  if (frameCount>>3)
-  {
-    window.close();
-  }
-
 }
 
  function mousePressed(){
@@ -130,4 +128,8 @@ function next(){
 	clear();
   // setup();
 	frameCount = frameCount +1;
+
+  if (frameCount == 8){
+    button.remove();
+  }
 }
