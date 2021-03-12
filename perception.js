@@ -1,5 +1,4 @@
 let capture;
-let button;
 let frameCount=0;
 let c=0;
 
@@ -11,22 +10,26 @@ function preload() {
   'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.' ];
 
   backgroundColors = ['#78e08f', '#fa983a', '#e55039', '#38ada9', '#b8e994', '#b71540', '#079992', '#6a89cc'];
-  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?'];
+  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', 'End'];
   camera = loadImage('camera.png');
   overlay = loadImage('overlay.png');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+
+  button = createButton('>>');
+  button.style('font-size', '24px');
+  button.position(1100, 800);
+  button.mousePressed(next);
+
   capture = createCapture(VIDEO);
   capture.size(400, 300);
   capture.hide();
   
-  button = createButton('Next');
-  button.style('font-size', '24px');
-  button.position(windowWidth/2-50, 800);
-  button.mousePressed(next);
+  // button.style('font-size', '24px');
+  // button.position(1100, 800);
+  // button.mousePressed(next);
 }
 
 function draw() {
@@ -36,8 +39,13 @@ function draw() {
   textSize(24);
   noStroke();
   textAlign(CENTER, CENTER);
+
   // Caption text here
   instruction = text(instructions[frameCount], windowWidth/2, 650);
+
+  // This text style does not work, need to fix later
+  textStyle(BOLDITALIC);
+  nextThing = text(buttonLabels[frameCount], windowWidth/2, 810);
 
   button.style('color', backgroundColors[frameCount]);
 
@@ -103,6 +111,12 @@ function draw() {
 
     pixelOverlay = image(overlay, 540, 44, 1112, 566);
   }
+
+  if (frameCount>>3)
+  {
+    window.close();
+  }
+
 }
 
  function mousePressed(){
@@ -111,5 +125,6 @@ function draw() {
 
 function next(){
 	clear();
+  // setup();
 	frameCount = frameCount +1;
 }
