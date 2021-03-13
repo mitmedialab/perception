@@ -8,10 +8,13 @@ function preload() {
   'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', 
   'Every pixel has a color. Every color is made of the three primary colors: Red, Green and Blue (RGB).\n The values indicate the redness, greenness and blueness of the color. \n Click on any point in the image above to see the RGB values of that point',
   'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.',
-  'Great job! You now know about how machines see us and how they store data. \n You can now close this window.' ];
+  'Machines store many pictures as many sets of pixels. Together this collection of pictures is called a "dataset"',
+  'Datasets can be many kinds - pictures, videos, numbers, audios',
+  'Great job! You now know about how machines see us and how they store data. \n You can now close this window.'
+   ];
 
-  backgroundColors = ['#78e08f', '#fa983a', '#e55039', '#38ada9', '#b8e994', '#b71540', '#079992', '#6a89cc'];
-  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', ''];
+  backgroundColors = ['#78e08f', '#6a89cc', '#fa983a', '#b71540', '#e55039', '#38ada9', '#b8e994', '#079992', '#fa983a'];
+  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', 'Are there other kinds of datasets'];
   camera = loadImage('camera.png');
   overlay = loadImage('overlay.png');
 }
@@ -129,7 +132,7 @@ function next(){
   // setup();
 	frameCount = frameCount +1;
 
-  if (frameCount == 8){
+  if (frameCount == 7){
     button.remove();
   }
 }
