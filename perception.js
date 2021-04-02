@@ -2,21 +2,27 @@ let capture;
 let frameCount=0;
 let c=0;
 
+var mic;
+var amplitude;
+var mapMax = 1.0;
+
+
 function preload() {
   myFont = loadFont('DIN.otf');
   instructions = ['Have you ever wondered how computers can look at us? \n Computers have "cameras" that enable them to look at us. \n How do cameras capture images? Let’s learn how cameras capture pictures. \n \n Turn on your webcam by clicking on "Allow" in the pop-up dialogue', 
   'Cameras have a lens that captures light and focuses it on a light-sensitive sensor. \n The sharp image generated is then stored as pixels that the computers can understand.', 
-  'Every pixel has a color. Every color is made of the three primary colors: Red, Green and Blue (RGB).\n The values indicate the redness, greenness and blueness of the color. \n Click on any point in the image above to see the RGB values of that point',
+  'Every pixel has a color. Every color is made of the three primary colors: Red, Green and Blue (RGB).\n The values indicate the redness, greenness and blueness of the color. \n \n Click on any point in the image above to see the RGB values of that point',
   'This image is 800 pixel wide and 600 pixels tall. \n Each pixel is stored as a set of three numbers, Red value, Green value and Blue value. \n Hence, the image is stored in machines as a collection of 800x600 sets of values.',
-  'Machines store many pictures as many sets of pixels. Together this collection of pictures is called a "dataset"',
+  'Machines store many pictures as many sets of pixels. Together this collection of pictures is called a "dataset". \n Images in a dataset can have "labels".',
   'Datasets can be many kinds - pictures, videos, numbers, audios',
   'Great job! You now know about how machines see us and how they store data. \n You can now close this window.'
    ];
 
-  backgroundColors = ['#78e08f', '#6a89cc', '#fa983a', '#b71540', '#e55039', '#38ada9', '#b8e994', '#079992', '#fa983a'];
-  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', 'Are there other kinds of datasets'];
+  backgroundColors = ['#78e08f', '#6a89cc', '#fa983a', '#82ccdd', '#b71540', '#e55039', '#38ada9', '#b8e994', '#079992', '#fa983a'];
+  buttonLabels = ['How do cameras capture pictures?', 'Show me pixels', 'How is this information stored?', 'What about many pictures?', 'Are there other kinds of datasets?', 'Awesome!'];
   camera = loadImage('camera.png');
   overlay = loadImage('overlay.png');
+  manyImages = loadImage('manyImages.png');
 }
 
 function setup() {
@@ -31,6 +37,7 @@ function setup() {
   capture.size(400, 300);
   capture.hide();
   // resetSketch();
+
 }
 
 // function resetSketch(){
@@ -121,6 +128,29 @@ function draw() {
     pixelOverlay = image(overlay, 540, 44, 1112, 566);
   }
 
+  if (frameCount==4) {
+    // imageMode(CENTER); 
+    many = image(manyImages, 100, 100, 1350, 695);
+  }
+
+  if (frameCount==5) {
+    // different kinds of datasets 
+  }
+}
+
+function audioVisual(){
+  
+
+  amplitude = new p5.Amplitude();
+  amplitude.setInput(mic);
+
+  var level = amplitude.getLevel();
+  text('Amplitude: ' + level, 20, 20);
+  text('mapMax: ' + mapMax, 20, 40);
+
+  // map ellipse height
+  var ellipseHeight = map(level, 0, mapMax, height, 0);
+  ellipse(width/2, ellipseHeight, 100, 100);
 }
 
  function mousePressed(){
@@ -132,7 +162,7 @@ function next(){
   // setup();
 	frameCount = frameCount +1;
 
-  if (frameCount == 7){
+  if (frameCount == 6){
     button.remove();
   }
 }
